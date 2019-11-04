@@ -36,9 +36,15 @@ public class VotingServiceImpl implements VotingService{
 	}
 
 	@Override
-	public User approveUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public User approveUser(User user) throws VotingException {
+		if(user != null && user.getAge() >= 18) {
+			user.setIsApproved(true);
+			userRepository.save(user);
+			return user;
+		}
+		else {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
+		}
 	}
 
 	@Override
@@ -75,6 +81,16 @@ public class VotingServiceImpl implements VotingService{
 	public Boolean publishResult() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public User searchUser(Long id) throws VotingException {
+		// TODO Auto-generated method stub
+		User user = userRepository.findByUserId(id);
+		if(user == null) {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
+		}
+		return user;
 	}
 
 }

@@ -55,6 +55,9 @@ public class User {
 	@Column(name = "VoteCount")
 	private Integer voteCount;
 	
+	@Column(name = "Contest_From")
+	private String contestFrom;
+	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "chosen_nominee")
 	private User nomineeChosen;
@@ -70,10 +73,10 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public User(Long userId, String username, String password, String emailId, Integer age, String gender,
 			String aadharNo, Boolean isAdmin, Boolean isApproved, Boolean isNominee, Boolean hasVoted,
-			Integer voteCount, User nomineeChosen, Address address) {
+			Integer voteCount, String contestFrom, User nomineeChosen, Address address, Poll poll) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -87,10 +90,12 @@ public class User {
 		this.isNominee = isNominee;
 		this.hasVoted = hasVoted;
 		this.voteCount = voteCount;
+		this.contestFrom = contestFrom;
 		this.nomineeChosen = nomineeChosen;
 		this.address = address;
+		this.poll = poll;
 	}
-	
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -187,6 +192,14 @@ public class User {
 		this.voteCount = voteCount;
 	}
 
+	public String getContestFrom() {
+		return contestFrom;
+	}
+
+	public void setContestFrom(String contestFrom) {
+		this.contestFrom = contestFrom;
+	}
+
 	public User getNomineeChosen() {
 		return nomineeChosen;
 	}
@@ -202,13 +215,22 @@ public class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+
+	public Poll getPoll() {
+		return poll;
+	}
+
+	public void setPoll(Poll poll) {
+		this.poll = poll;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", emailId=" + emailId
 				+ ", age=" + age + ", gender=" + gender + ", aadharNo=" + aadharNo + ", isAdmin=" + isAdmin
 				+ ", isApproved=" + isApproved + ", isNominee=" + isNominee + ", hasVoted=" + hasVoted + ", voteCount="
-				+ voteCount + ", nomineeChosen=" + nomineeChosen + ", address=" + address + "]";
+				+ voteCount + ", contestFrom=" + contestFrom + ", nomineeChosen=" + nomineeChosen + ", address="
+				+ address + ", poll=" + poll + "]";
 	}
 
 	@Override
