@@ -34,22 +34,28 @@ public class Poll {
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 	
-	@OneToMany(mappedBy = "poll", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "pollNominee", cascade = CascadeType.PERSIST)
 	private List<User> nominees;
+	
+	@OneToMany(mappedBy = "pollVote", cascade = CascadeType.PERSIST)
+	private List<User> users;
 	
 	public Poll() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Poll(Long pollId, String pollCenter, LocalDateTime startTime, LocalDateTime endTime, List<User> nominees) {
+	public Poll(Long pollId, String pollCenter, LocalDateTime startTime, LocalDateTime endTime, List<User> nominees,
+			List<User> users) {
 		super();
 		this.pollId = pollId;
 		this.pollCenter = pollCenter;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.nominees = nominees;
+		this.users = users;
 	}
+
 
 	public Long getPollId() {
 		return pollId;
@@ -89,6 +95,20 @@ public class Poll {
 
 	public void setNominees(List<User> nominees) {
 		this.nominees = nominees;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	@Override
+	public String toString() {
+		return "Poll [pollId=" + pollId + ", pollCenter=" + pollCenter + ", startTime=" + startTime + ", endTime="
+				+ endTime + ", nominees=" + nominees + ", users=" + users + "]";
 	}
 
 	@Override

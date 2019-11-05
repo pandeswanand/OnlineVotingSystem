@@ -5,11 +5,15 @@ package com.cg.voting.dto;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -51,6 +55,12 @@ public class User {
 	private Boolean isApproved;
 	private Boolean isNominee;
 	private Boolean hasVoted;
+	private Boolean isNomineeApproved;
+	private String pollLocation;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "chosen_nominee")
+	private User nomineeChosen;
 	
 	@Column(name = "VoteCount")
 	private Integer voteCount;
@@ -58,16 +68,16 @@ public class User {
 	@Column(name = "Contest_From")
 	private String contestFrom;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "chosen_nominee")
-	private User nomineeChosen;
-	
 	@Embedded
 	private Address address;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "poll_Id")
-	private Poll poll;
+	@JoinColumn(name = "poll_vote_Id")
+	private Poll pollVote;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "poll_nominee_Id")
+	private Poll pollNominee;
 	
 	public User() {
 		super();
@@ -76,7 +86,8 @@ public class User {
 
 	public User(Long userId, String username, String password, String emailId, Integer age, String gender,
 			String aadharNo, Boolean isAdmin, Boolean isApproved, Boolean isNominee, Boolean hasVoted,
-			Integer voteCount, String contestFrom, User nomineeChosen, Address address, Poll poll) {
+			Boolean isNomineeApproved, String pollLocation, User nomineeChosen, Integer voteCount, String contestFrom,
+			Address address, Poll pollVote, Poll pollNominee) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -89,11 +100,14 @@ public class User {
 		this.isApproved = isApproved;
 		this.isNominee = isNominee;
 		this.hasVoted = hasVoted;
+		this.isNomineeApproved = isNomineeApproved;
+		this.pollLocation = pollLocation;
+		this.nomineeChosen = nomineeChosen;
 		this.voteCount = voteCount;
 		this.contestFrom = contestFrom;
-		this.nomineeChosen = nomineeChosen;
 		this.address = address;
-		this.poll = poll;
+		this.pollVote = pollVote;
+		this.pollNominee = pollNominee;
 	}
 
 	public Long getUserId() {
@@ -184,6 +198,30 @@ public class User {
 		this.hasVoted = hasVoted;
 	}
 
+	public Boolean getIsNomineeApproved() {
+		return isNomineeApproved;
+	}
+
+	public void setIsNomineeApproved(Boolean isNomineeApproved) {
+		this.isNomineeApproved = isNomineeApproved;
+	}
+
+	public String getPollLocation() {
+		return pollLocation;
+	}
+
+	public void setPollLocation(String pollLocation) {
+		this.pollLocation = pollLocation;
+	}
+
+	public User getNomineeChosen() {
+		return nomineeChosen;
+	}
+
+	public void setNomineeChosen(User nomineeChosen) {
+		this.nomineeChosen = nomineeChosen;
+	}
+
 	public Integer getVoteCount() {
 		return voteCount;
 	}
@@ -200,14 +238,6 @@ public class User {
 		this.contestFrom = contestFrom;
 	}
 
-	public User getNomineeChosen() {
-		return nomineeChosen;
-	}
-
-	public void setNomineeChosen(User nomineeChosen) {
-		this.nomineeChosen = nomineeChosen;
-	}
-
 	public Address getAddress() {
 		return address;
 	}
@@ -216,21 +246,30 @@ public class User {
 		this.address = address;
 	}
 
-	public Poll getPoll() {
-		return poll;
+	public Poll getPollVote() {
+		return pollVote;
 	}
 
-	public void setPoll(Poll poll) {
-		this.poll = poll;
+	public void setPollVote(Poll pollVote) {
+		this.pollVote = pollVote;
+	}
+
+	public Poll getPollNominee() {
+		return pollNominee;
+	}
+
+	public void setPollNominee(Poll pollNominee) {
+		this.pollNominee = pollNominee;
 	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", emailId=" + emailId
 				+ ", age=" + age + ", gender=" + gender + ", aadharNo=" + aadharNo + ", isAdmin=" + isAdmin
-				+ ", isApproved=" + isApproved + ", isNominee=" + isNominee + ", hasVoted=" + hasVoted + ", voteCount="
-				+ voteCount + ", contestFrom=" + contestFrom + ", nomineeChosen=" + nomineeChosen + ", address="
-				+ address + ", poll=" + poll + "]";
+				+ ", isApproved=" + isApproved + ", isNominee=" + isNominee + ", hasVoted=" + hasVoted
+				+ ", isNomineeApproved=" + isNomineeApproved + ", pollLocation=" + pollLocation + ", nomineeChosen="
+				+ nomineeChosen + ", voteCount=" + voteCount + ", contestFrom=" + contestFrom + ", address=" + address
+				+ ", pollVote=" + pollVote + ", pollNominee=" + pollNominee + "]";
 	}
 
 	@Override

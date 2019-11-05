@@ -3,6 +3,8 @@
  */
 package com.cg.voting.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,21 +50,38 @@ public class VotingServiceImpl implements VotingService{
 	}
 
 	@Override
-	public User approveNominee(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public User approveNominee(User user) throws VotingException{
+		User saveduser = userRepository.save(user);
+		if(saveduser == null) {
+			throw new VotingException(VotingExceptionMessage.DATABASEFULL);
+		}
+		return saveduser;
 	}
 
 	@Override
-	public User registerNominee(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public User registerNominee(User user) throws VotingException {
+		if(user == null) {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
+		}
+		else if(user.getAge() < 25) {
+			throw new VotingException(VotingExceptionMessage.NOMINEENOTAPPROVED);
+		}
+		else if(!user.getIsApproved()){
+			throw new VotingException(VotingExceptionMessage.USERNOTAPPROVED);
+		}
+		else {
+			userRepository.save(user);
+		}
+		return user;
 	}
 
 	@Override
-	public Poll createPoll(Poll poll) {
-		// TODO Auto-generated method stub
-		return null;
+	public Poll createPoll(Poll poll) throws VotingException {
+		Poll savePoll = pollRepository.save(poll);
+		if(savePoll == null) {
+			throw new VotingException(VotingExceptionMessage.POLLNOTFOUND);
+		}
+		return savePoll;
 	}
 
 	@Override
@@ -85,7 +104,6 @@ public class VotingServiceImpl implements VotingService{
 
 	@Override
 	public User searchUser(Long id) throws VotingException {
-		// TODO Auto-generated method stub
 		User user = userRepository.findByUserId(id);
 		if(user == null) {
 			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
@@ -93,4 +111,21 @@ public class VotingServiceImpl implements VotingService{
 		return user;
 	}
 
+	@Override
+	public List<User> getUsers(String location) throws VotingException {
+		List<User> users = userRepository.findAllUsersInCenter(location);
+		if(users == null) {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUNDINLOCATION);
+		}
+		return users;
+	}
+
+	@Override
+	public List<User> getNominees(String location) throws VotingException {
+		List<User> nominees = userRepository.findAllNomineesInCenter(location);
+		if(nominees == null) {
+			throw new VotingException(VotingExceptionMessage.NOMINEENOTFOUNDINLOCATION);
+		}
+		return nominees;
+	}
 }
