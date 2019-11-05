@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 /**
  * @author Swanand
  *
@@ -31,7 +34,10 @@ public class Poll {
 	@Column(name = "Center")
 	private String pollCenter;
 	
+	@DateTimeFormat(iso=ISO.DATE_TIME)
 	private LocalDateTime startTime;
+	
+	@DateTimeFormat(iso=ISO.DATE_TIME)
 	private LocalDateTime endTime;
 	
 	@OneToMany(mappedBy = "pollNominee", cascade = CascadeType.PERSIST)

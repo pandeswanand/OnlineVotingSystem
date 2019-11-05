@@ -13,4 +13,5 @@ import com.cg.voting.dto.Poll;
  */
 public interface PollRepository extends JpaRepository<Poll, Long>{
 
+	public Poll findByPollCenter(String center);
 }

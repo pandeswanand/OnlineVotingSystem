@@ -85,9 +85,19 @@ public class VotingServiceImpl implements VotingService{
 	}
 
 	@Override
-	public Boolean vote() {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean vote(User votingUser, User nominee) throws VotingException {
+		if(votingUser.getIsApproved() && votingUser.getHasVoted() == false) {
+			votingUser.setHasVoted(true);
+			votingUser.setNomineeChosen(nominee);
+			int count = nominee.getVoteCount();
+			count = count + 1;
+			userRepository.save(votingUser);
+			userRepository.save(nominee);
+		}
+		else {
+			throw new VotingException(VotingExceptionMessage.CANNOTREVOTE);
+		}
+		return true;
 	}
 
 	@Override
@@ -127,5 +137,11 @@ public class VotingServiceImpl implements VotingService{
 			throw new VotingException(VotingExceptionMessage.NOMINEENOTFOUNDINLOCATION);
 		}
 		return nominees;
+	}
+
+	@Override
+	public Poll searchPoll(String center) throws VotingException {
+		Poll poll = pollRepository.findByPollCenter(center);
+		return poll;
 	}
 }

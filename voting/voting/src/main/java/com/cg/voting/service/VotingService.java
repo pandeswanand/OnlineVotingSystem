@@ -20,10 +20,11 @@ public interface VotingService {
 	public User approveNominee(User user) throws VotingException;
 	public User registerNominee(User user) throws VotingException;
 	public Poll createPoll(Poll poll) throws VotingException;
-	public Boolean vote();
+	public Boolean vote(User votingUser, User nominee) throws VotingException;
 	public Long calculateResult();
 	public Boolean publishResult();
 	public User searchUser(Long id) throws VotingException;
 	public List<User> getUsers(String location) throws VotingException;
 	public List<User> getNominees(String location) throws VotingException;
+	public Poll searchPoll(String center) throws VotingException;
 }
