@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -174,6 +175,46 @@ public class AdminVotingController {
 				});
 				return new ResponseEntity<String>(JSONObject.quote("There seems to be a draw between nominees with name - "+names), HttpStatus.OK);
 			}
+		} catch (VotingException e) {
+			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/list/user/unapproved")
+	public ResponseEntity<?> listUnapprovedUsers(){
+		try {
+			List<User> list = votingService.searchUnapprovedUsers();
+			List<User> displayList = new ArrayList<User>();
+			list.forEach(user->{
+				User addUser = new User();
+				addUser.setUserId(user.getUserId());
+				addUser.setUsername(user.getUsername());
+				addUser.setAadharNo(user.getAadharNo());
+				addUser.setAge(user.getAge());
+				addUser.setPollLocation(user.getPollLocation());
+				displayList.add(addUser);
+			});
+			return new ResponseEntity<List<User>>(displayList, HttpStatus.OK);
+		} catch (VotingException e) {
+			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/list/nominee/unapproved")
+	public ResponseEntity<?> listUnapprovedNominees(){
+		try {
+			List<User> list = votingService.searchUnapprovedNominees();
+			List<User> displayList = new ArrayList<User>();
+			list.forEach(user->{
+				User addUser = new User();
+				addUser.setUserId(user.getUserId());
+				addUser.setUsername(user.getUsername());
+				addUser.setAadharNo(user.getAadharNo());
+				addUser.setAge(user.getAge());
+				addUser.setContestFrom(user.getContestFrom());
+				displayList.add(addUser);
+			});
+			return new ResponseEntity<List<User>>(displayList, HttpStatus.OK);
 		} catch (VotingException e) {
 			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

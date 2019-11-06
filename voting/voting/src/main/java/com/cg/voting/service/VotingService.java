@@ -28,4 +28,6 @@ public interface VotingService {
 	public List<User> getNominees(String location) throws VotingException;
 	public Poll searchPoll(String center) throws VotingException;
 	public List<User> searchUserByVotesInCenter(Long votes, String center) throws VotingException;
+	public List<User> searchUnapprovedUsers() throws VotingException;
+	public List<User> searchUnapprovedNominees() throws VotingException;
 }
