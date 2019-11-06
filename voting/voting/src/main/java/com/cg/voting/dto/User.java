@@ -63,7 +63,7 @@ public class User {
 	private User nomineeChosen;
 	
 	@Column(name = "VoteCount")
-	private Integer voteCount;
+	private Long voteCount;
 	
 	@Column(name = "Contest_From")
 	private String contestFrom;
@@ -86,7 +86,7 @@ public class User {
 
 	public User(Long userId, String username, String password, String emailId, Integer age, String gender,
 			String aadharNo, Boolean isAdmin, Boolean isApproved, Boolean isNominee, Boolean hasVoted,
-			Boolean isNomineeApproved, String pollLocation, User nomineeChosen, Integer voteCount, String contestFrom,
+			Boolean isNomineeApproved, String pollLocation, User nomineeChosen, Long voteCount, String contestFrom,
 			Address address, Poll pollVote, Poll pollNominee) {
 		super();
 		this.userId = userId;
@@ -222,11 +222,11 @@ public class User {
 		this.nomineeChosen = nomineeChosen;
 	}
 
-	public Integer getVoteCount() {
+	public Long getVoteCount() {
 		return voteCount;
 	}
 
-	public void setVoteCount(Integer voteCount) {
+	public void setVoteCount(Long voteCount) {
 		this.voteCount = voteCount;
 	}
 

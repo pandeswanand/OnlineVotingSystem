@@ -17,4 +17,6 @@ public class VotingExceptionMessage {
 	public static final String NOMINEENOTFOUNDINLOCATION = "No nominees are present in given location";
 	public static final String POLLNOTFOUND = "The Poll does not exist!";
 	public static final String CANNOTREVOTE = "Cannot revote!";
+	public static final String VOTEBEFORESTARTTIME = "Voting has not yet started!";
+	public static final String VOTEAFTERENDTIME = "Voting has finished!";
 }

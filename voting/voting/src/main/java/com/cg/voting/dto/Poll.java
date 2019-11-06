@@ -34,10 +34,10 @@ public class Poll {
 	@Column(name = "Center")
 	private String pollCenter;
 	
-	@DateTimeFormat(iso=ISO.DATE_TIME)
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime startTime;
 	
-	@DateTimeFormat(iso=ISO.DATE_TIME)
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime endTime;
 	
 	@OneToMany(mappedBy = "pollNominee", cascade = CascadeType.PERSIST)

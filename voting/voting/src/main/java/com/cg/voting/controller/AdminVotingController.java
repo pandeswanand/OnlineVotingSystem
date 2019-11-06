@@ -49,9 +49,10 @@ public class AdminVotingController {
 			userOne.setIsApproved(false);
 			userOne.setIsNominee(false);
 			userOne.setIsNomineeApproved(false);
-			userOne.setVoteCount(0);
+			userOne.setVoteCount(0L);
 			userOne.setContestFrom("");
 			userOne.setNomineeChosen(null);
+			userOne.setPollLocation(null);
 			if (user.getAddress().getArea().equals("Airoli") || user.getAddress().getArea().equals("Ghansoli")
 					|| user.getAddress().getArea().equals("Koparkhairne") || user.getAddress().getArea().equals("Vashi")
 					|| user.getAddress().getArea().equals("Turbhe")) {
@@ -156,5 +157,25 @@ public class AdminVotingController {
 		} catch (VotingException e) {
 			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}		
+	}
+	
+	@PostMapping(value = "/result")
+	public ResponseEntity<?> getResult(@RequestParam("center") String center){
+		Long votes = votingService.calculateResult(center);
+		try {
+			List<User> userList = votingService.searchUserByVotesInCenter(votes, center);
+			if(userList.size() == 1) {
+				return new ResponseEntity<String>(JSONObject.quote("Nominee "+userList.get(0).getUsername()+" won by scoring "+votes+" votes!"), HttpStatus.OK);
+			}
+			else {
+				StringBuilder names = new StringBuilder();
+				userList.forEach(user->{
+					names.append(user.getUsername()+" ");
+				});
+				return new ResponseEntity<String>(JSONObject.quote("There seems to be a draw between nominees with name - "+names), HttpStatus.OK);
+			}
+		} catch (VotingException e) {
+			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

@@ -3,7 +3,11 @@
  */
 package com.cg.voting.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,25 +89,43 @@ public class VotingServiceImpl implements VotingService{
 	}
 
 	@Override
-	public Boolean vote(User votingUser, User nominee) throws VotingException {
-		if(votingUser.getIsApproved() && votingUser.getHasVoted() == false) {
-			votingUser.setHasVoted(true);
-			votingUser.setNomineeChosen(nominee);
-			int count = nominee.getVoteCount();
-			count = count + 1;
-			userRepository.save(votingUser);
-			userRepository.save(nominee);
+	public synchronized Boolean vote(User votingUser, User nominee) throws VotingException {
+		LocalDateTime currentTime = LocalDateTime.now();
+		if(currentTime.isBefore(votingUser.getPollVote().getStartTime())) {
+			throw new VotingException(VotingExceptionMessage.VOTEBEFORESTARTTIME);
 		}
-		else {
+		else if(currentTime.isAfter(votingUser.getPollVote().getEndTime())) {
+			throw new VotingException(VotingExceptionMessage.VOTEAFTERENDTIME);
+		}
+		else if(!votingUser.getIsApproved() || votingUser.getHasVoted() == true) {
 			throw new VotingException(VotingExceptionMessage.CANNOTREVOTE);
 		}
-		return true;
+		else{
+			votingUser.setHasVoted(true);
+			votingUser.setNomineeChosen(nominee);
+			Long count = nominee.getVoteCount();
+			count = count + 1;
+			nominee.setVoteCount(count);
+			userRepository.save(votingUser);
+			userRepository.save(nominee);
+			return true;
+		}
 	}
 
 	@Override
-	public Long calculateResult() {
-		// TODO Auto-generated method stub
-		return null;
+	public Long calculateResult(String center) {
+		Poll poll = pollRepository.findByPollCenter(center);
+		Long votesFirst = 0L;
+		if(poll != null) {
+			List<User> nominees = poll.getNominees();
+			List<Long> count = new ArrayList<Long>();
+			nominees.forEach(nominee->{
+				count.add(nominee.getVoteCount());
+			});
+			List<Long> votes = count.stream().sorted().collect(Collectors.toList());
+			votesFirst = votes.get(votes.size()-1);
+		}
+		return votesFirst;
 	}
 
 	@Override
@@ -143,5 +165,14 @@ public class VotingServiceImpl implements VotingService{
 	public Poll searchPoll(String center) throws VotingException {
 		Poll poll = pollRepository.findByPollCenter(center);
 		return poll;
+	}
+
+	@Override
+	public List<User> searchUserByVotesInCenter(Long votes, String center) throws VotingException {
+		List<User> userList = userRepository.findByVoteCountAndPollLocation(votes, center);
+		if(userList == null) {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
+		}
+		return userList;
 	}
 }
