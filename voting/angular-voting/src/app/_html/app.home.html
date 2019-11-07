@@ -1,0 +1,173 @@
+  <section id="home" class="banner">
+    <div class="bg-color">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li class=""><a href="/home#home">Home</a></li>
+                <li class=""><a href="/home#about">About</a></li>
+                <li class=""><a href="/home#contact">Contact</a></li>
+                <li class=""><a href="#" data-target="#login" data-toggle="modal">Login</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="modal fade" id="login" role="dialog">
+   		 <div class="modal-dialog modal-sm">
+
+      <!-- Modal content no 1-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center form-title">Login</h4>
+        </div>
+        <div class="modal-body padtrbl">
+
+          <div class="login-box-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+            <div class="form-group">
+              <form name="" id="loginForm">
+                <div class="form-group has-feedback">
+                  <!----- username -------------->
+                  <input class="form-control" placeholder="Username" id="loginid" type="text" autocomplete="off" />
+                  <span style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginid"></span>
+                  <!---Alredy exists  ! -->
+                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                  <!----- password -------------->
+                  <input class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
+                  <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
+                  <!---Alredy exists  ! -->
+                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <button type="button" class="btn btn-green btn-block btn-flat" onclick="userlogin()">LogIn</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+      <div class="container">
+        <div class="row">
+          <div class="banner-info">
+            <div class="banner-text text-center">
+              <h1 style="color: #b3b3ff; font-size: 40px; padding-top: 30px">Every Vote Counts</h1>
+              <br>
+              <p style="font-size: 30px">Register Now and Vote anytime during poll at your own comfort!</p>
+            </div>
+            <div class="overlay-detail text-center">
+              <a href="/home#about"><i class="fa fa-angle-down"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="about" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 col-sm-4 col-xs-12">
+          <div class="section-title">
+            <h2 class="head-title lg-line">OnlineVoter<br>Ultimate Dream</h2>
+            <hr class="botm-line">
+            <p class="sec-para">Let Everyone vote at their own comfort</p>
+          </div>
+        </div>
+        <div class="col-md-7 col-sm-8 col-xs-12">
+          <div style="visibility: visible;" class="col-sm-9 more-features-box">
+            <div class="more-features-box-text">
+              <div class="more-features-box-text-icon"> <i class="fa fa-angle-right" aria-hidden="true"></i> </div>
+              <div class="more-features-box-text-description">
+                <h3>Vote at any time during Voting Period</h3>
+                <p>As soon as the voting starts, the users can start voting and can vote anytime between the period of voting</p>
+              </div>
+            </div>
+            <div class="more-features-box-text">
+              <div class="more-features-box-text-icon"> <i class="fa fa-angle-right" aria-hidden="true"></i> </div>
+              <div class="more-features-box-text-description">
+                <h3>Get Instant Results</h3>
+                <p>As the voting ends, user can get results instantly and know the winner</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="cta-2" class="section-padding">
+    <div class="container">
+      <div class=" row">
+        <div class="col-md-6 col-sm-5">
+          <h3>We must vote for hope, vote for life, vote for a brighter future for all of our loved ones</h3>
+          <p class="text-center text-primary"><i>— Ed Markey</i></p>
+        </div>
+        <div class="col-md-6 col-sm-5">
+          <h3>To make democracy work, we must be a nation of participants, not simply observers. One who does not vote has no right to complain</h3>
+          <p class="text-center text-primary"><i>— Louis L'Amour</i></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer id="contact" class="section-padding" style="background-color: #325C6A">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="ser-title">Contact us</h2>
+          <hr class="botm-line">
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <h3>Contact Info</h3>
+          <div class="space"></div>
+          <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Chief Election Office<br> New Delhi, India</p>
+          <div class="space"></div>
+          <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>info@electionoffice.com</p>
+          <div class="space"></div>
+          <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+91 1234567890</p>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="ftr-tle">
+              <h3 class="white no-padding" style="color: #222222">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick Links</h3>
+            </div>
+            <div class="info-sec">
+              <ul class="quick-info">
+                <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+                <li><a href="/home#about"><i class="fa fa-circle"></i>About</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <div class="ftr-tle">
+              <h3 class="white no-padding" style="color: #222222">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Follow us</h3>
+            </div>
+            <div class="info-sec">
+              <ul class="social-icon">
+                <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
+                <li class="bgred"><i class="fa fa-google-plus"></i></li>
+                <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
+                <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+  </footer>
+
