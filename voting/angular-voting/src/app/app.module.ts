@@ -16,13 +16,15 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Homecomponent } from './_component/app.homecomponent';
 import { AdminComponent } from './_component/app.admincomponent';
 import { UserComponent } from './_component/app.usercomponent';
+import { ApproveUserComponent } from './_component/app.approveusercomponent';
 
 
 const routes:Routes = [
     { path: '', redirectTo: 'home', pathMatch:'full'},
     { path: 'home', component:Homecomponent },
     { path: 'admin', component:AdminComponent },
-    { path: 'user', component:UserComponent }
+    { path: 'user', component:UserComponent },
+    { path: 'approveuser', component:ApproveUserComponent }
 ];
 
 @NgModule({
@@ -30,7 +32,7 @@ const routes:Routes = [
         BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule, CommonModule, Ng2SmartTableModule, RouterModule.forRoot(routes), FileUploadModule,NgxPaginationModule
     ],
     declarations: [
-        AppComponent, Homecomponent, AdminComponent, UserComponent
+        AppComponent, Homecomponent, AdminComponent, UserComponent, ApproveUserComponent
 		], 
 
     //providers: [{provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true}],
