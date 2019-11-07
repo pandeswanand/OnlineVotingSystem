@@ -169,10 +169,28 @@ public class VotingServiceImpl implements VotingService{
 
 	@Override
 	public List<User> searchUserByVotesInCenter(Long votes, String center) throws VotingException {
-		List<User> userList = userRepository.findByVoteCountAndPollLocation(votes, center);
+		List<User> userList = userRepository.findByVoteCountAndContestFrom(votes, center);
 		if(userList == null) {
 			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
 		}
 		return userList;
+	}
+
+	@Override
+	public List<User> searchUnapprovedUsers() throws VotingException {
+		List<User> list = userRepository.findAllUnapprovedUsers();
+		if(list == null) {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
+		}
+		return list;
+	}
+
+	@Override
+	public List<User> searchUnapprovedNominees() throws VotingException {
+		List<User> list = userRepository.findAllUnapprovedNominees();
+		if(list == null) {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
+		}
+		return list;
 	}
 }
