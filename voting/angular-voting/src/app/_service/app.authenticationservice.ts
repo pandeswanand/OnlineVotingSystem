@@ -28,7 +28,6 @@ export class AuthenticationService {
     }
 
     checkRole(email:string){
-        alert("hello");
         return this.httpClient.get("http://localhost:9088/admin/search/user?email="+email);
     }
 

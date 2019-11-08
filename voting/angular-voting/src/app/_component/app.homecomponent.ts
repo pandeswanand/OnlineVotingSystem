@@ -16,7 +16,6 @@ export class Homecomponent {
     constructor(private service:AuthenticationService, private router:Router){}
 
     login(){
-        alert(this.emailId);
         this.service.authenticate(this.emailId, this.password).subscribe(
             userData => {
                 let tokenStr= 'Bearer '+ userData.token;

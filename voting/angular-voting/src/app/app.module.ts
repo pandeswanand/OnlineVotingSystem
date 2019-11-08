@@ -19,6 +19,7 @@ import { UserComponent } from './_component/app.usercomponent';
 import { ApproveUserComponent } from './_component/app.approveusercomponent';
 import { RegisterComponent } from './_component/app.registercomponent';
 import { BasicAuthHtppInterceptorService } from './_service/app.basicauthinterceptorservice';
+import { ApproveNomineeComponent } from './_component/app.approvenomineecomponent';
 
 
 const routes:Routes = [
@@ -28,6 +29,7 @@ const routes:Routes = [
     { path: 'user', component:UserComponent },
     { path: 'approveuser', component:ApproveUserComponent },
     { path: 'register', component:RegisterComponent}
+    { path: 'approvenominee', component:ApproveNomineeComponent}
 ];
 
 @NgModule({
@@ -35,7 +37,7 @@ const routes:Routes = [
         BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule, CommonModule, Ng2SmartTableModule, RouterModule.forRoot(routes), FileUploadModule,NgxPaginationModule
     ],
     declarations: [
-        AppComponent, Homecomponent, AdminComponent, UserComponent, ApproveUserComponent, RegisterComponent
+        AppComponent, Homecomponent, AdminComponent, UserComponent, ApproveUserComponent, RegisterComponent, ApproveNomineeComponent
 		], 
 
     providers: [{provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true}],

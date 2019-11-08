@@ -16,7 +16,6 @@ export class RegisterComponent{
     constructor(private service:AuthenticationService, private router:Router){}
 
     register(){
-        console.log(this.userdata);
         this.service.register(this.userdata).subscribe((data)=>{alert("Successfully Registered!");
             this.router.navigate(['/home']).then(()=>window.location.reload())}, error=>{alert(error.error);});
     }

@@ -93,15 +93,14 @@
                     <div class="text-center col-md-6 col-lg-6">Address:City</div>
                     <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
                         <select name="city" [(ngModel)]="userdata.address.city">
-                            <option value="Navi Mumbai">Navi Mumbai</option>
+                            <option value="Navi Mumbai" selected>Navi Mumbai</option>
                             <option value="Mumbai">Mumbai</option>
-                            <option value="Thane">Thane</option>
                         </select>
                         <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" *ngIf="userdata.address.city=='Navi Mumbai'; else elseBlock">
                     <div class="text-center col-md-6 col-lg-6">Address:Area</div>
                     <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
                         <select name="area" [(ngModel)]="userdata.address.area">
@@ -111,16 +110,25 @@
                             <option value="Koparkhairne">Koparkhairne</option>
                             <option value="Digha">Digha</option>
                             <option value="Turbhe">Turbhe</option>
+                        </select>
+                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                    </div>
+                </div>
+                <ng-template #elseBlock>
+                    <div class="row">
+                        <div class="text-center col-md-6 col-lg-6">Address:Area</div>
+                        <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
+                          <select name="area" [(ngModel)]="userdata.address.area">  
                             <option value="Chembur">Chembur</option>
                             <option value="Govandi">Govandi</option>
                             <option value="Powai">Powai</option>
                             <option value="Saki Naka">Saki Naka</option>
                             <option value="Marol Naka">Marol Naka</option>
                             <option value="MIDC">MIDC</option>
-                        </select>
-                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
-                    </div>
-                </div>
+                          </select>
+                        </div>
+                    </div>    
+                </ng-template>
                 <br>
                 <div class="row">
                     <div class="text-center col-md-6 col-lg-6">Address:Pincode</div>

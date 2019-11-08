@@ -15,4 +15,12 @@ export class UserService{
     approveUser(id:number){
         return this.http.post("http://localhost:9088/admin/user/approve?userid="+id,null);
     }
+
+    getNominees(){
+        return this.http.get("http://localhost:9088/admin/list/nominee/unapproved");
+    }
+
+    approveNominee(id:number, center:string){
+        return this.http.post("http://localhost:9088/admin/nominee/approve?userid="+id+"&center="+center,null);
+    }
 }

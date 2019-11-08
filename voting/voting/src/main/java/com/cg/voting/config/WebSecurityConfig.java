@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests()
-				.antMatchers("/admin/nominee/add", "/admin/user/approve", "/admin//nominee/approve",
+				.antMatchers("/admin/nominee/add", "/admin/user/approve", "/admin/nominee/approve",
 						"/admin/poll/add", "/admin/result", "/admin/list/user/unapproved", "/admin/list/nominee/unapproved").hasRole("ADMIN")
 				.antMatchers().hasRole("USER")
 				.antMatchers("/authenticate", "/register","/admin/search/user").permitAll().
