@@ -36,51 +36,6 @@ public class AdminVotingController {
 	@Autowired
 	VotingService votingService;
 
-	@PostMapping(value = "/user/add")
-	public ResponseEntity<?> addUser(@RequestBody User user) {
-		try {	
-			User userOne = new User();
-			userOne.setUsername(user.getUsername());
-			userOne.setPassword(user.getPassword());
-			userOne.setEmailId(user.getEmailId());
-			userOne.setAge(user.getAge());
-			userOne.setAadharNo(user.getAadharNo());
-			userOne.setGender(user.getGender());
-			userOne.setAddress(user.getAddress());
-			userOne.setHasVoted(false);
-			userOne.setIsAdmin(false);
-			userOne.setIsApproved(false);
-			userOne.setIsNominee(false);
-			userOne.setIsNomineeApproved(false);
-			userOne.setVoteCount(0L);
-			userOne.setContestFrom("");
-			userOne.setNomineeChosen(null);
-			userOne.setPollLocation(null);
-			if (user.getAddress().getArea().equals("Airoli") || user.getAddress().getArea().equals("Ghansoli")
-					|| user.getAddress().getArea().equals("Koparkhairne") || user.getAddress().getArea().equals("Vashi")
-					|| user.getAddress().getArea().equals("Turbhe")) {
-				userOne.setPollLocation("Airoli");
-			}
-			else if(user.getAddress().getArea().equals("Chembur") || user.getAddress().getArea().equals("Govandi")) {
-				userOne.setPollLocation("Chembur");
-			}
-			else {
-				userOne.setPollLocation("Andheri(E)");
-			}
-			Poll poll = votingService.searchPoll(userOne.getPollLocation());
-			if(poll == null) {
-				userOne.setPollVote(null);
-			}
-			else {
-				userOne.setPollVote(poll);
-			}
-			votingService.addUser(userOne);
-			return new ResponseEntity<User>(userOne, HttpStatus.OK);
-		} catch (VotingException e) {
-			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
 	@PostMapping(value = "/nominee/add")
 	public ResponseEntity<?> addNominee(@RequestParam("userid") Long id, @RequestParam("area") String place) {
 		try {
@@ -219,6 +174,16 @@ public class AdminVotingController {
 			return new ResponseEntity<List<User>>(displayList, HttpStatus.OK);
 		} catch (VotingException e) {
 			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/search/user")
+	public ResponseEntity<?> searchByEmail(@RequestParam("email") String email){
+		try {
+			User user = votingService.searchUser(email);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		} catch (VotingException e) {
+			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

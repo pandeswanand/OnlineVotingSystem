@@ -1,0 +1,183 @@
+<section class="banner">
+        <div class="">
+          <nav class="navbar" style="background-color: rgba(28,74,90, 0.9); min-height: 90px;">
+            <div class="container">
+              <div class="col-md-12">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                          </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                  <ul class="nav navbar-nav" style="padding-top: 24px;">
+                    <li class=""><a href="/admin#admin" style="color: #222222">Home</a></li>
+                    <li class=""><a href="/home#contact" style="color: #222222">Contact</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+</section>
+<br><br><br>
+<section id="portfolio">
+		<div class="container wow fadeInUp">
+            <div class="section-header">
+                <h3 class="section-title" style="text-align: center;">Register Form</h3>
+            </div>
+            <br><br><br>
+			<form name="register"> 					
+				<div class="row">					
+					<div class="text-center col-md-6 col-lg-6">Username</div>
+					<div class="text-center col-md-6 col-lg-4">
+						<input type="text" name="username" [(ngModel)]="userdata.username" />
+						<!-- <span *ngIf ="nameError!=null" class="error" style="color: red"></span>	 -->
+					</div>
+				</div>
+				<br>
+				<div class="row">				
+					<div class="text-center col-md-6 col-lg-6">Password</div>
+					<div class="text-center col-md-4 col-lg-4">
+						<input type="password" name="password" [(ngModel)]="userdata.password"/>							
+						<!-- <span *ngIf ="durationError!=null" class="error" style="color: red"></span>						 -->
+					</div>				
+				</div>
+				<br>
+				<div class="row">
+					<div class="text-center col-md-6 col-lg-6">Email Id</div>
+					<div class="text-center col-md-4 col-lg-4">
+						<input type="text" name="emailId" [(ngModel)]="userdata.emailId"/>						
+						<!-- <span *ngIf ="startTimeError!=null" class="error" style="color: red"></span>						 -->
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="text-center col-md-6 col-lg-6">Age</div>
+					<div class="text-center col-md-4 col-lg-4">
+						<input type="number" name="age" [(ngModel)]="userdata.age"/>
+						<!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+					</div>
+				</div>
+                <br>
+                <div class="row">
+                    <div class="text-center col-md-6 col-lg-6">Aadhar No</div>
+                    <div class="text-center col-md-4 col-lg-4">
+                        <input type="text" name="aadhar" [(ngModel)]="userdata.aadharNo"/>
+                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="text-center col-md-6 col-lg-6">Gender</div>
+                    <div class="col-md-4 col-lg-4" style="padding-left: 110px">
+                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Male"> Male<br>
+                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Female"> Female<br>
+                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Other"> Other<br>
+                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="text-center col-md-6 col-lg-6">Address:State</div>
+                    <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
+                            <select name="state" [(ngModel)]="userdata.address.state">
+                                <option value="Maharashtra">Maharashtra</option>
+                            </select>    
+                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="text-center col-md-6 col-lg-6">Address:City</div>
+                    <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
+                        <select name="city" [(ngModel)]="userdata.address.city">
+                            <option value="Navi Mumbai">Navi Mumbai</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Thane">Thane</option>
+                        </select>
+                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="text-center col-md-6 col-lg-6">Address:Area</div>
+                    <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
+                        <select name="area" [(ngModel)]="userdata.address.area">
+                            <option value="Airoli">Airoli</option>
+                            <option value="Vashi">Vashi</option>
+                            <option value="Ghansoli">Ghansoli</option>
+                            <option value="Koparkhairne">Koparkhairne</option>
+                            <option value="Digha">Digha</option>
+                            <option value="Turbhe">Turbhe</option>
+                            <option value="Chembur">Chembur</option>
+                            <option value="Govandi">Govandi</option>
+                            <option value="Powai">Powai</option>
+                            <option value="Saki Naka">Saki Naka</option>
+                            <option value="Marol Naka">Marol Naka</option>
+                            <option value="MIDC">MIDC</option>
+                        </select>
+                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="text-center col-md-6 col-lg-6">Address:Pincode</div>
+                    <div class="text-center col-md-4 col-lg-4">
+                        <input type="number" name="pincode" [(ngModel)]="userdata.address.pincode" (focusout)="validateEndTime()"/>
+                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                    </div>
+                </div>
+                <br>
+				<div class="row">
+                    <div class="text-center col-lg-6" class="form-group"></div>
+                    <div class="text-center col-lg-4" class="form-group" style=" padding-left: 540px;">
+						<button class="btn btn-primary" type="submit" (click)="register()">Register</button>
+                    </div>
+				</div>
+			</form>
+		</div>
+</section>
+<footer id="contact" class="section-padding" style="background-color: #325C6A">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="ser-title">Contact us</h2>
+              <hr class="botm-line">
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <h3>Contact Info</h3>
+              <div class="space"></div>
+              <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Chief Election Office<br> New Delhi, India</p>
+              <div class="space"></div>
+              <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>info@electionoffice.com</p>
+              <div class="space"></div>
+              <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+91 1234567890</p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="ftr-tle">
+                  <h3 class="white no-padding" style="color: #222222">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick Links</h3>
+                </div>
+                <div class="info-sec">
+                  <ul class="quick-info">
+                    <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4">
+                <div class="ftr-tle">
+                  <h3 class="white no-padding" style="color: #222222">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Follow us</h3>
+                </div>
+                <div class="info-sec">
+                  <ul class="social-icon">
+                    <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
+                    <li class="bgred"><i class="fa fa-google-plus"></i></li>
+                    <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
+                    <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+</footer>

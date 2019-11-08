@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -192,5 +193,14 @@ public class VotingServiceImpl implements VotingService{
 			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
 		}
 		return list;
+	}
+
+	@Override
+	public User searchUser(String email) throws VotingException {
+		Optional<User> user = userRepository.findByEmailId(email);
+		if(user.get() == null) {
+			throw new VotingException(VotingExceptionMessage.USERNOTFOUND);
+		}
+		return user.get();
 	}
 }

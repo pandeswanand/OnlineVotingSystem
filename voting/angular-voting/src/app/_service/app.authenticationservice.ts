@@ -19,16 +19,17 @@ export class AuthenticationService {
 
   constructor(private httpClient:HttpClient, private router:Router) {}
 
-    authenticate(username, password) {
-        return this.httpClient.post<any>('http://13.126.85.104:9088/authenticate',{username,password})
+    authenticate(email, password) {
+        return this.httpClient.post<any>('http://localhost:9088/authenticate',{"emailId":email,"password":password});
     }
   
-    register(name,password){
-        return this.httpClient.post<any>("http://13.126.85.104:9088/register",{"username":name,"password":password,"isAdmin":"false","isDeleted":"false"}).subscribe((data)=>alert("Successfully Registered!"), error=>{alert(error.error);});
+    register(data:any){
+        return this.httpClient.post<any>("http://localhost:9088/register",data);
     }
 
-    checkRole(name:string){
-        return this.httpClient.get("http://13.126.85.104:9088/searchuser?name="+name);
+    checkRole(email:string){
+        alert("hello");
+        return this.httpClient.get("http://localhost:9088/admin/search/user?email="+email);
     }
 
     isUserLoggedIn() {

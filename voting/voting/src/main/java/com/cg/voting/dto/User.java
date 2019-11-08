@@ -39,7 +39,7 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "Email")
+	@Column(name = "Email", unique = true)
 	private String emailId;
 	
 	@Column(name = "Age")
@@ -48,7 +48,7 @@ public class User {
 	@Column(name = "Gender")
 	private String gender;
 	
-	@Column(name = "AadharNo")
+	@Column(name = "AadharNo", unique = true)
 	private String aadharNo;
 	
 	private Boolean isAdmin;

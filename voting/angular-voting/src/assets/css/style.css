@@ -11,8 +11,30 @@ body {
 ol, ul {
 	list-style: none;
 }
+.fonts{
+    font-size: 20px;
+}
 blockquote, q {
 	quotes: none;
+}
+.btn-get-started {
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 50px;
+    transition: 0.5s;
+    margin: 10px;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  
+.btn-get-started:hover {
+    background: #2dc997;
+    border: 2px solid #2dc997;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {

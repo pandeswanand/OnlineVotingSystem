@@ -1,6 +1,6 @@
 <section class="banner">
         <div class="">
-          <nav class="navbar" style="background-color: rgba(28,74,90, 0.9); min-height: 40px;">
+          <nav class="navbar" style="background-color: rgba(28,74,90, 0.9); min-height: 90px;">
             <div class="container">
               <div class="col-md-12">
                 <div class="navbar-header">
@@ -11,14 +11,14 @@
                           </button>
                 </div>
                 <div class="collapse navbar-collapse navbar-right" id="myNavbar">
-                  <ul class="nav navbar-nav">
-                    <li class=""><a href="/admin#admin">Home</a></li>
-                    <li class=""><a href="/">Approve Users</a></li>
-                    <li class=""><a href="/">Approve Nominees</a></li>
-                    <li class=""><a href="/">Create Poll</a></li>
-                    <li class=""><a href="/">Vote</a></li>
-                    <li class=""><a href="/">Publish Result</a></li>
-                    <li class=""><a href="#">Logout</a></li>
+                  <ul class="nav navbar-nav" style="padding-top: 24px;">
+                    <li class=""><a href="/admin#admin" style="color: #222222">Home</a></li>
+                    <li class=""><a href="/" style="color: #222222">Approve Users</a></li>
+                    <li class=""><a href="/" style="color: #222222">Approve Nominees</a></li>
+                    <li class=""><a href="/" style="color: #222222">Create Poll</a></li>
+                    <li class=""><a href="/" style="color: #222222">Vote</a></li>
+                    <li class=""><a href="/" style="color: #222222">Publish Result</a></li>
+                    <li class=""><a href="#" style="color: #222222">Logout</a></li>
                   </ul>
                 </div>
               </div>
@@ -31,33 +31,21 @@
         <div class="container wow fadeInUp">
           <div class="section-header">
             <h3 style="text-align: center;">Unapproved Users</h3>
-            <p style="text-align: center;">Here is a list of all unapproved users</p><input style="align-self: auto; center " type="submit" value="List Users" (click)="getUserList()">
+            <p style="text-align: center;">Here is a list of all unapproved users</p>
           </div>
           <br><br>
-          <div class="row">
-            <div class = "col-md-3 col-lg-3"></div>
-            <div class = "col-md-9 col-lg-6">
-               <table>
-                   <tr>
-                        <th>User Id</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <th>Username</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <th>Aadhar No</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <th>Age</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <th>Poll Location</th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <th>Status</th>
-                    </tr>
-                    <tr *ngFor="let user of users">
-                        <td>{{user.userId}}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>{{user.username}}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>{{user.aadharNo}}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>{{user.age}}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td>{{user.pollLocation}}</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <td><button (click)="approveUser(user.userId)">Approve</button></td>
-                    </tr>
-               </table>
-            </div>
+                <div class="row">
+                <div class = "col-md-3 col-lg-3"></div>
+                <div *ngIf="users.length==0; else elseBlock" class = "col-md-9 col-lg-6">
+                  <h3 style="text-align: center">
+                    There are no unapproved users currently!
+                  </h3>                  
+                </div>
+            <ng-template #elseBlock>
+                <ng2-smart-table [settings]="settings" [source] = "users" (custom)="approveUser($event)"></ng2-smart-table> 
+            </ng-template>
           </div>
-        </div>
+          </div>
       </section>
       <br><br><br><br><br><br><br><br><br><br>
   <footer id="contact" class="section-padding" style="background-color: #325C6A">
