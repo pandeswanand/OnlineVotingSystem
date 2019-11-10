@@ -1,4 +1,5 @@
 import { Address } from "./app.address";
+import { Poll } from "./app.poll";
 
 export class User{
     userId:number;
@@ -10,4 +11,5 @@ export class User{
     age:number;
     address:Address;
     isAdmin:boolean;
+    poll:Poll;
 }

@@ -31,4 +31,5 @@ public interface VotingService {
 	public List<User> searchUnapprovedUsers() throws VotingException;
 	public List<User> searchUnapprovedNominees() throws VotingException;
 	public User searchUser(String email) throws VotingException;
+	public Poll searchUserPoll(String email) throws VotingException;
 }

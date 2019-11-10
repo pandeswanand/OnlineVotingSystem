@@ -1,0 +1,102 @@
+<section class="banner">
+    <div class="">
+      <nav class="navbar" style="background-color: rgba(28,74,90, 0.9); min-height: 90px;">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+              <ul class="nav navbar-nav" style="padding-top: 24px;">
+                <li class=""><a href="/admin#admin" style="color: #222222">Home</a></li>
+                <li class=""><a href="/admin#contact" style="color: #222222">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+</section>
+<br><br><br>
+<section id="portfolio">
+    <div class="container wow fadeInUp">
+        <div class="section-header">
+            <h3 class="section-title" style="text-align: center;">Vote</h3>
+        </div>
+        <br><br><br>
+        <div class="text-center col-md-12 col-lg-12" *ngIf="center != poll.pollCenter else startTimeBlock">
+          <h3>No Election going on in this Area currently!!</h3>
+        </div> 					
+        <ng-template #startTimeBlock>
+          <div class="text-center col-md-12 col-lg-12" *ngIf="poll.startTime > currentTime else endTimeBlock"><h3>Voting has not yet started!!</h3></div>
+        </ng-template>
+        <ng-template #endTimeBlock>
+          <div class="text-center col-md-12 col-lg-12" *ngIf="currentTime > poll.endTime else voteBlock"><h3>Voting has ended!!</h3></div>
+        </ng-template>
+        <ng-template #voteBlock>
+            <table>
+              <tr>
+                <th style="padding-left: 80px;">User Id</th>
+                <th style="padding-left: 200px;">Name</th>
+                <th style="padding-left: 280px;">Vote</th>
+              </tr>
+              <br>
+              <tr *ngFor="let nominee of nominees">
+                  <td style="padding-left: 80px;">{{nominee.userId}}</td>
+                  <td style="padding-left: 200px;">{{nominee.username}}</td>
+                  <div style="padding-left: 280px;">
+                      <button type="button" class="btn btn-primary" (click)="vote(nominee.userId)">VOTE</button>
+                  </div>
+                  <br>
+              </tr>
+              <br>
+            </table>
+        </ng-template>
+    </div>
+</section>
+<footer id="contact" class="section-padding" style="background-color: #325C6A">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="ser-title">Contact us</h2>
+          <hr class="botm-line">
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <h3>Contact Info</h3>
+          <div class="space"></div>
+          <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Chief Election Office<br> New Delhi, India</p>
+          <div class="space"></div>
+          <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>info@electionoffice.com</p>
+          <div class="space"></div>
+          <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+91 1234567890</p>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="ftr-tle">
+              <h3 class="white no-padding" style="color: #222222">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quick Links</h3>
+            </div>
+            <div class="info-sec">
+              <ul class="quick-info">
+                <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <div class="ftr-tle">
+              <h3 class="white no-padding" style="color: #222222">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Follow us</h3>
+            </div>
+            <div class="info-sec">
+              <ul class="social-icon">
+                <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
+                <li class="bgred"><i class="fa fa-google-plus"></i></li>
+                <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
+                <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+</footer>

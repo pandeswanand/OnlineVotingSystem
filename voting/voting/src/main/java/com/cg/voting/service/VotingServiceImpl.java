@@ -203,4 +203,13 @@ public class VotingServiceImpl implements VotingService{
 		}
 		return user.get();
 	}
+
+	@Override
+	public Poll searchUserPoll(String email) throws VotingException {
+		Poll poll = pollRepository.findUserPoll(email);
+		if(poll == null) {
+			throw new VotingException(VotingExceptionMessage.POLLNOTFOUND);
+		}
+		return poll;
+	}
 }

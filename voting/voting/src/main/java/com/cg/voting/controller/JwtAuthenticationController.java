@@ -62,7 +62,7 @@ public class JwtAuthenticationController {
 		try {
 			System.out.println(user.toString());
 			User returnedUser = userDetailsService.save(user);
-			return new ResponseEntity<User>(returnedUser,HttpStatus.OK);
+			return new ResponseEntity<String>(JSONObject.quote("Successfully registered!"),HttpStatus.OK);
 		}
 		catch(VotingException e) {
 			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()),HttpStatus.BAD_REQUEST);

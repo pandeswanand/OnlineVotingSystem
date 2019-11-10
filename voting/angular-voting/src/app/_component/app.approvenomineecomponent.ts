@@ -54,4 +54,3 @@ export class ApproveNomineeComponent implements OnInit{
         window.location.reload();
     }
 }
-}

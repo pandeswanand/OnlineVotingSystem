@@ -177,13 +177,49 @@ public class AdminVotingController {
 		}
 	}
 	
-	@GetMapping("/search/user")
+	@GetMapping(value = "/search/user")
 	public ResponseEntity<?> searchByEmail(@RequestParam("email") String email){
 		try {
 			User user = votingService.searchUser(email);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			User sendUser = new User();
+			sendUser.setEmailId(user.getEmailId());
+			sendUser.setIsAdmin(user.getIsAdmin());
+			sendUser.setUserId(user.getUserId());
+			sendUser.setPollLocation(user.getPollLocation());
+			return new ResponseEntity<User>(sendUser, HttpStatus.OK);
 		} catch (VotingException e) {
 			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping(value = "/search/poll")
+	public ResponseEntity<?> searchUserPoll(@RequestParam("email") String email){
+		try {
+			Poll poll = votingService.searchUserPoll(email);
+			Poll sendPoll = new Poll();
+			sendPoll.setPollCenter(poll.getPollCenter());
+			sendPoll.setStartTime(poll.getStartTime());
+			sendPoll.setEndTime(poll.getEndTime());
+			return new ResponseEntity<Poll>(sendPoll, HttpStatus.OK);
+		} catch (VotingException e) {
+			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/list/nominee")
+	public ResponseEntity<?> getNominees(@RequestParam("center") String center){
+		try {
+			List<User> nominees = votingService.getNominees(center);
+			List<User> sendUser = new ArrayList<User>();
+			nominees.forEach(nominee->{
+				User user = new User();
+				user.setUserId(nominee.getUserId());
+				user.setUsername(nominee.getUsername());
+				sendUser.add(user);
+			});
+			return new ResponseEntity<List<User>>(sendUser, HttpStatus.OK);
+		} catch (VotingException e) {
+			return new ResponseEntity<String>(JSONObject.quote(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

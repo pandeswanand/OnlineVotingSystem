@@ -12,7 +12,7 @@
                 </div>
                 <div class="collapse navbar-collapse navbar-right" id="myNavbar">
                   <ul class="nav navbar-nav" style="padding-top: 24px;">
-                    <li class=""><a href="/admin#admin" style="color: #222222">Home</a></li>
+                    <li class=""><a href="/home#home" style="color: #222222">Home</a></li>
                     <li class=""><a href="/home#contact" style="color: #222222">Contact</a></li>
                   </ul>
                 </div>
@@ -32,78 +32,86 @@
 				<div class="row">					
 					<div class="text-center col-md-6 col-lg-6">Username</div>
 					<div class="text-center col-md-6 col-lg-4">
-						<input type="text" name="username" [(ngModel)]="userdata.username" />
-						<!-- <span *ngIf ="nameError!=null" class="error" style="color: red"></span>	 -->
+            <input type="text" name="username" [(ngModel)]="userdata.username" (focusout)="validateName()" />
+            <br>
+						<span *ngIf ="nameError!=null" style="color: red">{{nameError}}</span>	 
 					</div>
 				</div>
 				<br>
 				<div class="row">				
 					<div class="text-center col-md-6 col-lg-6">Password</div>
 					<div class="text-center col-md-4 col-lg-4">
-						<input type="password" name="password" [(ngModel)]="userdata.password"/>							
-						<!-- <span *ngIf ="durationError!=null" class="error" style="color: red"></span>						 -->
+            <input type="password" name="password" [(ngModel)]="userdata.password" (focusout)="validatePassword()"/>		
+            <br>					
+						<span *ngIf ="passwordError!=null" style="color: red">{{passwordError}}</span>
 					</div>				
 				</div>
 				<br>
 				<div class="row">
 					<div class="text-center col-md-6 col-lg-6">Email Id</div>
 					<div class="text-center col-md-4 col-lg-4">
-						<input type="text" name="emailId" [(ngModel)]="userdata.emailId"/>						
-						<!-- <span *ngIf ="startTimeError!=null" class="error" style="color: red"></span>						 -->
+						<input type="text" name="emailId" [(ngModel)]="userdata.emailId" (focusout)="validateEmail()"/>						
+            <br>
+            <span *ngIf ="emailError!=null" style="color: red">{{emailError}}</span>
 					</div>
 				</div>
 				<br>
 				<div class="row">
 					<div class="text-center col-md-6 col-lg-6">Age</div>
 					<div class="text-center col-md-4 col-lg-4">
-						<input type="number" name="age" [(ngModel)]="userdata.age"/>
-						<!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+						<input type="number" name="age" [(ngModel)]="userdata.age" (focusout)="validateAge()"/>
+            <br>
+            <span *ngIf ="ageError!=null" style="color: red">{{ageError}}</span>
 					</div>
 				</div>
                 <br>
                 <div class="row">
                     <div class="text-center col-md-6 col-lg-6">Aadhar No</div>
                     <div class="text-center col-md-4 col-lg-4">
-                        <input type="text" name="aadhar" [(ngModel)]="userdata.aadharNo"/>
-                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                        <input type="text" name="aadhar" [(ngModel)]="userdata.aadharNo" (focusout)="validateAadhar()"/>
+                        <br>
+                        <span *ngIf ="aadharError!=null" style="color: red">{{aadharError}}</span>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="text-center col-md-6 col-lg-6">Gender</div>
                     <div class="col-md-4 col-lg-4" style="padding-left: 110px">
-                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Male"> Male<br>
-                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Female"> Female<br>
-                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Other"> Other<br>
-                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Male" (focusout)="validateGender()"> Male<br>
+                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Female" (focusout)="validateGender()"> Female<br>
+                        <input type="radio" name="gender" [(ngModel)]="userdata.gender" value="Other" (focusout)="validateGender()"> Other<br>
+                        <br>
+                        <span *ngIf ="genderError!=null" style="color: red">{{genderError}}</span>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="text-center col-md-6 col-lg-6">Address:State</div>
                     <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
-                            <select name="state" [(ngModel)]="userdata.address.state">
+                            <select name="state" [(ngModel)]="userdata.address.state" (focusout)="validateState()">
                                 <option value="Maharashtra">Maharashtra</option>
-                            </select>    
-                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                            </select>
+                            <br>    
+                          <span *ngIf ="stateError!=null" style="color: red">{{stateError}}</span>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="text-center col-md-6 col-lg-6">Address:City</div>
                     <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
-                        <select name="city" [(ngModel)]="userdata.address.city">
+                        <select name="city" [(ngModel)]="userdata.address.city" (focusout)="validateCity()">
                             <option value="Navi Mumbai" selected>Navi Mumbai</option>
                             <option value="Mumbai">Mumbai</option>
                         </select>
-                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                        <br>
+                        <span *ngIf ="cityError!=null" style="color: red">{{cityError}}</span>
                     </div>
                 </div>
                 <br>
                 <div class="row" *ngIf="userdata.address.city=='Navi Mumbai'; else elseBlock">
                     <div class="text-center col-md-6 col-lg-6">Address:Area</div>
                     <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
-                        <select name="area" [(ngModel)]="userdata.address.area">
+                        <select name="area" [(ngModel)]="userdata.address.area" (focusout)="validateArea()">
                             <option value="Airoli">Airoli</option>
                             <option value="Vashi">Vashi</option>
                             <option value="Ghansoli">Ghansoli</option>
@@ -111,14 +119,15 @@
                             <option value="Digha">Digha</option>
                             <option value="Turbhe">Turbhe</option>
                         </select>
-                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                        <br>
+                        <span *ngIf ="areaError!=null" style="color: red">{{areaError}}</span>
                     </div>
                 </div>
                 <ng-template #elseBlock>
                     <div class="row">
                         <div class="text-center col-md-6 col-lg-6">Address:Area</div>
                         <div class="col-md-4 col-lg-4" style=" padding-left: 105px;">
-                          <select name="area" [(ngModel)]="userdata.address.area">  
+                          <select name="area" [(ngModel)]="userdata.address.area" (focusout)="validateArea()">  
                             <option value="Chembur">Chembur</option>
                             <option value="Govandi">Govandi</option>
                             <option value="Powai">Powai</option>
@@ -126,6 +135,8 @@
                             <option value="Marol Naka">Marol Naka</option>
                             <option value="MIDC">MIDC</option>
                           </select>
+                          <br>
+                          <span *ngIf ="areaError!=null" style="color: red">{{areaError}}</span>
                         </div>
                     </div>    
                 </ng-template>
@@ -133,8 +144,9 @@
                 <div class="row">
                     <div class="text-center col-md-6 col-lg-6">Address:Pincode</div>
                     <div class="text-center col-md-4 col-lg-4">
-                        <input type="number" name="pincode" [(ngModel)]="userdata.address.pincode" (focusout)="validateEndTime()"/>
-                        <!-- <span *ngIf ="endTimeError!=null" class="error" style="color: red">{{endTimeError}}</span> -->
+                        <input type="number" name="pincode" [(ngModel)]="userdata.address.pincode" (focusout)="validatePincode()"/>
+                        <br>
+                        <span *ngIf ="pincodeError!=null" style="color: red">{{pincodeError}}</span>
                     </div>
                 </div>
                 <br>
@@ -169,7 +181,7 @@
                 </div>
                 <div class="info-sec">
                   <ul class="quick-info">
-                    <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+                    <li><a href="/home#home"><i class="fa fa-circle"></i>Home</a></li>
                   </ul>
                 </div>
               </div>

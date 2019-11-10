@@ -38,14 +38,18 @@
               <form>
                 <div class="form-group has-feedback">
                   <!----- username -------------->
-                  <input placeholder="Email Id" name="emailId" type="text" [(ngModel)]="emailId" />
+                  <input placeholder="Email Id" name="emailId" type="text" [(ngModel)]="emailId" (focusout)="validateEmail()"/>
+                  <br>
+                  <span *ngIf ="emailError!=null" style="color: red">{{emailError}}</span>
                   <span style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginid"></span>
                   <!---Alredy exists  ! -->
                   <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
                   <!----- password -------------->
-                  <input placeholder="Password" name="password" type="password" [(ngModel)]="password"/>
+                  <input placeholder="Password" name="password" type="password" [(ngModel)]="password" (focusout)="validatePassword()"/>
+                  <br>
+                  <span *ngIf ="passwordError!=null" style="color: red">{{passwordError}}</span>
                   <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
                   <!---Alredy exists  ! -->
                   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -151,7 +155,7 @@
             </div>
             <div class="info-sec">
               <ul class="quick-info">
-                <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+                <li><a href="/home#home"><i class="fa fa-circle"></i>Home</a></li>
                 <li><a href="/home#about"><i class="fa fa-circle"></i>About</a></li>
               </ul>
             </div>
