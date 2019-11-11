@@ -33,6 +33,7 @@ public class VotingServiceImpl implements VotingService{
 	@Autowired
 	PollRepository pollRepository;
 	
+	//Take a user object as input and add it to database 
 	@Override
 	public User addUser(User user) throws VotingException {
 		User saveduser = userRepository.save(user);
@@ -42,6 +43,7 @@ public class VotingServiceImpl implements VotingService{
 		return saveduser;
 	}
 
+	//Take a user as input and set approve flag as true
 	@Override
 	public User approveUser(User user) throws VotingException {
 		if(user != null && user.getAge() >= 18) {
@@ -54,6 +56,7 @@ public class VotingServiceImpl implements VotingService{
 		}
 	}
 
+	//Take a user as input and set nominee flag as true
 	@Override
 	public User approveNominee(User user) throws VotingException{
 		User saveduser = userRepository.save(user);
@@ -63,6 +66,7 @@ public class VotingServiceImpl implements VotingService{
 		return saveduser;
 	}
 
+	//Take a user as input and if eligible set isnominee flag as true
 	@Override
 	public User registerNominee(User user) throws VotingException {
 		if(user == null) {
@@ -80,6 +84,7 @@ public class VotingServiceImpl implements VotingService{
 		return user;
 	}
 
+	//Take poll object as input and add it to database
 	@Override
 	public Poll createPoll(Poll poll) throws VotingException {
 		Poll savePoll = pollRepository.save(poll);
@@ -89,6 +94,7 @@ public class VotingServiceImpl implements VotingService{
 		return savePoll;
 	}
 
+	//Take user voting and the user voted and set vote count
 	@Override
 	public synchronized Boolean vote(User votingUser, User nominee) throws VotingException {
 		LocalDateTime currentTime = LocalDateTime.now();
@@ -113,6 +119,7 @@ public class VotingServiceImpl implements VotingService{
 		}
 	}
 
+	//calculate the result of a particular center
 	@Override
 	public Long calculateResult(String center) {
 		Poll poll = pollRepository.findByPollCenter(center);
@@ -135,6 +142,7 @@ public class VotingServiceImpl implements VotingService{
 		return null;
 	}
 
+	//search a user based on his id
 	@Override
 	public User searchUser(Long id) throws VotingException {
 		User user = userRepository.findByUserId(id);
@@ -144,6 +152,7 @@ public class VotingServiceImpl implements VotingService{
 		return user;
 	}
 
+	//get all users of a particular center
 	@Override
 	public List<User> getUsers(String location) throws VotingException {
 		List<User> users = userRepository.findAllUsersInCenter(location);
@@ -153,6 +162,7 @@ public class VotingServiceImpl implements VotingService{
 		return users;
 	}
 
+	//get all nominees in a particular location
 	@Override
 	public List<User> getNominees(String location) throws VotingException {
 		List<User> nominees = userRepository.findAllNomineesInCenter(location);
@@ -162,12 +172,14 @@ public class VotingServiceImpl implements VotingService{
 		return nominees;
 	}
 
+	//Find poll based on a center
 	@Override
 	public Poll searchPoll(String center) throws VotingException {
 		Poll poll = pollRepository.findByPollCenter(center);
 		return poll;
 	}
 
+	//search users with a particular votes in a given center
 	@Override
 	public List<User> searchUserByVotesInCenter(Long votes, String center) throws VotingException {
 		List<User> userList = userRepository.findByVoteCountAndContestFrom(votes, center);
@@ -177,6 +189,7 @@ public class VotingServiceImpl implements VotingService{
 		return userList;
 	}
 
+	//get all unapproved users
 	@Override
 	public List<User> searchUnapprovedUsers() throws VotingException {
 		List<User> list = userRepository.findAllUnapprovedUsers();
@@ -186,6 +199,7 @@ public class VotingServiceImpl implements VotingService{
 		return list;
 	}
 
+	//get all unapproved nominees
 	@Override
 	public List<User> searchUnapprovedNominees() throws VotingException {
 		List<User> list = userRepository.findAllUnapprovedNominees();
@@ -195,6 +209,7 @@ public class VotingServiceImpl implements VotingService{
 		return list;
 	}
 
+	//search user based on his email
 	@Override
 	public User searchUser(String email) throws VotingException {
 		Optional<User> user = userRepository.findByEmailId(email);
@@ -204,6 +219,7 @@ public class VotingServiceImpl implements VotingService{
 		return user.get();
 	}
 
+	//search the poll in which a user is voting
 	@Override
 	public Poll searchUserPoll(String email) throws VotingException {
 		Poll poll = pollRepository.findUserPoll(email);

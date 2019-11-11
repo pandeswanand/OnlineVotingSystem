@@ -13,7 +13,8 @@ export class RegisterComponent{
     userdata:any={
         address:{}
     };
-    constructor(private service:AuthenticationService, private router:Router){}
+    image:any;
+    constructor(private service:AuthenticationService, private userService:UserService, private router:Router){}
 
     nameError=null;
     validateName():boolean{
@@ -21,8 +22,12 @@ export class RegisterComponent{
             this.nameError = "Username cannot be empty!";
             return false;
         }
+        else if(this.userdata.username.length < 3){
+            this.nameError = "Username should be atleast 3 characters long!";
+            return false;
+        }
         else{
-            this.nameError = null;
+            this.nameError=null;
             return true;
         }
     }
@@ -160,10 +165,20 @@ export class RegisterComponent{
         }
     }
 
+    getFileDetails(event){
+        console.log(event.target.files);
+        for (var i = 0; i < event.target.files.length; i++) { 
+            this.image = event.target.files[i].name;
+        }
+        console.log(this.image);
+    }
+
     register(){
         if(this.validateName() && this.validatePassword() && this.validateEmail() && this.validateAge() && this.validateAadhar() && this.validateGender() && this.validateState() && this.validateCity() && this.validateArea() && this.validatePincode()){
-            this.service.register(this.userdata).subscribe((data)=>{alert("Successfully Registered!");
-                this.router.navigate(['/home']).then(()=>window.location.reload())}, error=>{console.log(error.error);});
+            this.userService.uploadAadhar(this.image).subscribe((success)=>
+                this.service.register(this.userdata).subscribe((data)=>{alert("Successfully Registered!");
+                    this.router.navigate(['/home']).then(()=>window.location.reload())}, error=>{console.log(error.error);}),
+                    error=>{console.log(error.error)});
         }
     }
 }

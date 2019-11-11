@@ -13,6 +13,6 @@ export class PollService{
         form.append("pollCenter", poll.pollCenter);
         form.append("startTime", poll.startTime);
         form.append("endTime", poll.endTime);
-        return this.http.post("http://localhost:9088/admin/poll/add",form);
+        return this.http.post("http://localhost:9088/poll/add",form);
     }
 }

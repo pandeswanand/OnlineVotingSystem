@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "../_model/app.user";
 import { UserService } from "../_service/app.userservice";
+import { Router } from "@angular/router";
 
 @Component({
     selector:'approvenominee',
@@ -43,10 +44,13 @@ export class ApproveNomineeComponent implements OnInit{
         }
       };
 
-    constructor(private service:UserService){}
+    constructor(private service:UserService, private router:Router){}
 
     ngOnInit(){
-        this.service.getNominees().subscribe((data:User[])=>{this.users=data; console.log(this.users)});
+      if(sessionStorage.getItem("role")!= "admin"){
+          this.router.navigate(['/error403'])
+      }
+      this.service.getNominees().subscribe((data:User[])=>{this.users=data; console.log(this.users)});
     }
 
     approveNominee(event){

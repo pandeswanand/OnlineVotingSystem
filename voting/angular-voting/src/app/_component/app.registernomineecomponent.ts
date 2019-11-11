@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { UserService } from "../_service/app.userservice";
 import { Router } from "@angular/router";
 
@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
     selector:'registernominee',
     templateUrl:'../_html/app.registernominee.html'
 })
-export class RegisterNomineeComponent{
+export class RegisterNomineeComponent implements OnInit{
 
     area:string;
 
@@ -21,6 +21,12 @@ export class RegisterNomineeComponent{
         else{
             this.centerError=null;
             return true;
+        }
+    }
+
+    ngOnInit(){
+        if(sessionStorage.getItem("role")!= "user"){
+            this.router.navigate(['/error403'])
         }
     }
 

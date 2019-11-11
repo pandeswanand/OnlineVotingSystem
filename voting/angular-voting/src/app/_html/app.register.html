@@ -28,7 +28,7 @@
                 <h3 class="section-title" style="text-align: center;">Register Form</h3>
             </div>
             <br><br><br>
-			<form name="register"> 					
+			<form name="register" enctype="multipart/form-data"> 					
 				<div class="row">					
 					<div class="text-center col-md-6 col-lg-6">Username</div>
 					<div class="text-center col-md-6 col-lg-4">
@@ -72,6 +72,15 @@
                         <br>
                         <span *ngIf ="aadharError!=null" style="color: red">{{aadharError}}</span>
                     </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="text-center col-md-6 col-lg-6">Aadhar PDF Upload</div>
+                  <div class="text-center col-md-4 col-lg-4">
+                      <input type="file" name="aadharfile" style="padding-left: 90px" (change)="getFileDetails($event)"/>
+                      <br>
+                      <!-- <span *ngIf ="aadharError!=null" style="color: red">{{aadharError}}</span> -->
+                  </div>
                 </div>
                 <br>
                 <div class="row">

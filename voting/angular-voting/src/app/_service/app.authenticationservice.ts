@@ -28,7 +28,7 @@ export class AuthenticationService {
     }
 
     checkRole(email:string){
-        return this.httpClient.get("http://localhost:9088/admin/search/user?email="+email);
+        return this.httpClient.get("http://localhost:9088/search/user?email="+email);
     }
 
     isUserLoggedIn() {
@@ -37,9 +37,10 @@ export class AuthenticationService {
     }
 
     logOut() {
-        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('userEmail');
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("role");
         sessionStorage.removeItem("userId");
+        sessionStorage.removeItem("location");
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Poll } from "../_model/app.poll";
 import { PollService } from "../_service/app.pollservice";
 import { Router } from "@angular/router";
@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
     selector:'addpoll',
     templateUrl:'../_html/app.addpoll.html'
 })
-export class AddPollComponent{
+export class AddPollComponent implements OnInit{
     poll:Poll={
         pollCenter:null,
         startTime:null,
@@ -15,6 +15,12 @@ export class AddPollComponent{
     }
 
     constructor(private service:PollService, private router:Router){}
+
+    ngOnInit(){
+        if(sessionStorage.getItem("role")!= "admin"){
+            this.router.navigate(['/error403'])
+        }
+    }
 
     centerError=null;
     validateCenter():boolean{

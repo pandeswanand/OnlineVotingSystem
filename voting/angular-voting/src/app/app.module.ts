@@ -25,6 +25,8 @@ import { RegisterNomineeComponent } from './_component/app.registernomineecompon
 import { VoteComponent } from './_component/app.votecomponent';
 import { Error403Component } from './_component/app.403pagecomponent';
 import { Error404Component } from './_component/app.404pagecomponent';
+import { LogoutComponent } from './_component/app.logoutcomponent';
+import { ResultComponent } from './_component/app.resultcomponent';
 
 
 const routes:Routes = [
@@ -38,6 +40,8 @@ const routes:Routes = [
     { path:'addpoll', component:AddPollComponent },
     { path:'registernominee', component:RegisterNomineeComponent },
     { path:'vote', component:VoteComponent },
+    { path:'logout', component:LogoutComponent},
+    { path:'result', component:ResultComponent},
     { path:'error403', component:Error403Component },
     { path:'**', component:Error404Component }
 ];
@@ -48,7 +52,7 @@ const routes:Routes = [
     ],
     declarations: [
         AppComponent, Homecomponent, AdminComponent, UserComponent, ApproveUserComponent, RegisterComponent, ApproveNomineeComponent,
-        AddPollComponent, RegisterNomineeComponent, VoteComponent, Error403Component, Error404Component
+        AddPollComponent, RegisterNomineeComponent, VoteComponent, Error403Component, Error404Component, LogoutComponent, ResultComponent
 		], 
 
     providers: [{provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true}],
