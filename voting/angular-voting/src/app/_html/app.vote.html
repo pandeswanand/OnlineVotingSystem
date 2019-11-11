@@ -10,12 +10,28 @@
                         <span class="icon-bar"></span>
                       </button>
             </div>
-            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+            <div *ngIf="role=='admin' else userBlock" class="collapse navbar-collapse navbar-right" id="myNavbar">
               <ul class="nav navbar-nav" style="padding-top: 24px;">
                 <li class=""><a href="/admin#admin" style="color: #222222">Home</a></li>
-                <li class=""><a href="/admin#contact" style="color: #222222">Contact</a></li>
+                <li class=""><a href="/approveuser" style="color: #222222">Approve Users</a></li>
+                <li class=""><a href="/approvenominee" style="color: #222222">Approve Nominees</a></li>
+                <li class=""><a href="/addpoll" style="color: #222222">Create Poll</a></li>
+                <li class=""><a href="/vote" style="color: #222222">Vote</a></li>
+                <li class=""><a href="/result" style="color: #222222">Get Result</a></li>
+                <li class=""><a href="/logout" style="color: #222222">Logout</a></li>
               </ul>
             </div>
+            <ng-template #userBlock>
+              <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                <ul class="nav navbar-nav" style="padding-top: 24px;">
+                  <li class=""><a href="/user#user" style="color: #222222">Home</a></li>
+                  <li class=""><a href="/registernominee" style="color: #222222">Register as Nominee</a></li>
+                  <li class=""><a href="/vote" style="color: #222222">Vote</a></li>
+                  <li class=""><a href="/result" style="color: #222222">Get Result</a></li>
+                  <li class=""><a href="/logout" style="color: #222222">Logout</a></li>
+                </ul>
+              </div>
+            </ng-template>
           </div>
         </div>
       </nav>

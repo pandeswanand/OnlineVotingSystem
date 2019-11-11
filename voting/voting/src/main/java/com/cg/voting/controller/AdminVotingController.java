@@ -42,7 +42,7 @@ import com.cg.voting.service.VotingService;
  *
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class AdminVotingController {
 
 	@Autowired
@@ -151,7 +151,7 @@ public class AdminVotingController {
 	}
 	
 	//Return the result of a particular center
-	@PostMapping(value = "/result")
+	@GetMapping(value = "/result")
 	public ResponseEntity<?> getResult(@RequestParam("center") String center){
 		Long votes = votingService.calculateResult(center);
 		try {

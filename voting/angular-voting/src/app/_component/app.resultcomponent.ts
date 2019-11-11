@@ -15,14 +15,24 @@ export class ResultComponent implements OnInit{
         endTime:null
     }
     currentTime:any;
+    result:string;
+    role:string;
 
     ngOnInit(){
         this.service.searchUserPoll(sessionStorage.getItem("userEmail")).subscribe((data:Poll)=>
-            {this.poll=data; this.getEndTime(), this.currentTime=new Date().getTime(); console.log(this.currentTime)})
+            {this.poll=data; this.getEndTime(), this.currentTime=new Date().getTime(); console.log(this.currentTime); this.getResult(); this.getRole()})
     }
 
     getEndTime(){
         this.poll.endTime = new Date(this.poll.endTime).getTime();
         console.log(this.poll.endTime);
+    }
+
+    getResult(){
+        this.service.getResult(sessionStorage.getItem("location")).subscribe((data:string)=>{this.result=data}, error=>{alert(error.error)});
+    }
+
+    getRole(){
+        this.role=sessionStorage.getItem("role");
     }
 }

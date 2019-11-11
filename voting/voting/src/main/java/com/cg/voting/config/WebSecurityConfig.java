@@ -63,9 +63,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// dont authenticate this particular request
 				.authorizeRequests()
 				.antMatchers("/user/approve", "/nominee/approve",
-						"/poll/add", "/result", "/list/user/unapproved", "/list/nominee/unapproved").hasRole("ADMIN")
+						"/poll/add", "/list/user/unapproved", "/list/nominee/unapproved").hasRole("ADMIN")
 				.antMatchers("/nominee/add").hasRole("USER")
-				.antMatchers("/authenticate", "/register","/search/user", "/upload/aadhar", "/result").permitAll().
+				.antMatchers("/authenticate", "/register","/search/user", "/search/poll", "/list/nominee", "/upload/aadhar", "/vote", "/result").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
 //				// make sure we use stateless session; session won't be used to

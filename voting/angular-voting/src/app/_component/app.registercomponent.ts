@@ -79,6 +79,10 @@ export class RegisterComponent{
             this.ageError="Age cannot be less than 18 years!";
             return false;
         }
+        else if(this.userdata.age>100){
+            this.ageError="Age cannot be greater than 100 years!";
+            return false;
+        }
         else{
             this.ageError=null;
             return true;
@@ -165,20 +169,10 @@ export class RegisterComponent{
         }
     }
 
-    getFileDetails(event){
-        console.log(event.target.files);
-        for (var i = 0; i < event.target.files.length; i++) { 
-            this.image = event.target.files[i].name;
-        }
-        console.log(this.image);
-    }
-
     register(){
         if(this.validateName() && this.validatePassword() && this.validateEmail() && this.validateAge() && this.validateAadhar() && this.validateGender() && this.validateState() && this.validateCity() && this.validateArea() && this.validatePincode()){
-            this.userService.uploadAadhar(this.image).subscribe((success)=>
                 this.service.register(this.userdata).subscribe((data)=>{alert("Successfully Registered!");
-                    this.router.navigate(['/home']).then(()=>window.location.reload())}, error=>{console.log(error.error);}),
-                    error=>{console.log(error.error)});
+                    this.router.navigate(['/home']).then(()=>window.location.reload())}, error=>{alert(error.error);})
         }
     }
 }

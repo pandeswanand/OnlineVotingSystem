@@ -20,15 +20,15 @@ export class AuthenticationService {
   constructor(private httpClient:HttpClient, private router:Router) {}
 
     authenticate(email, password) {
-        return this.httpClient.post<any>('http://localhost:9088/authenticate',{"emailId":email,"password":password});
+        return this.httpClient.post<any>('http://"+window.location.hostname+":9088/authenticate',{"emailId":email,"password":password});
     }
   
     register(data:any){
-        return this.httpClient.post<any>("http://localhost:9088/register",data);
+        return this.httpClient.post<any>("http://"+window.location.hostname+":9088/register",data);
     }
 
     checkRole(email:string){
-        return this.httpClient.get("http://localhost:9088/search/user?email="+email);
+        return this.httpClient.get("http://"+window.location.hostname+":9088/search/user?email="+email);
     }
 
     isUserLoggedIn() {
