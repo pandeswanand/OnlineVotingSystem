@@ -99,6 +99,10 @@ export class RegisterComponent{
             this.aadharError="Aadhar number should be 12 digits long!";
             return false;
         }
+        else if(this.userdata.aadharNo < 0){
+            this.aadharError="Aadhar number cannot be negative!";
+            return false;
+        }
         else{
             this.aadharError=null;
             return true;
@@ -161,6 +165,10 @@ export class RegisterComponent{
         }
         else if(this.userdata.address.pincode.toString().length != 6){
             this.pincodeError="Pincode should be 6 digits long!";
+            return false;
+        }
+        else if(this.userdata.address.pincode < 0){
+            this.pincodeError="Pincode cannot be negative!";
             return false;
         }
         else{

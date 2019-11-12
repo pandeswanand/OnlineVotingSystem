@@ -20,7 +20,7 @@ export class AuthenticationService {
   constructor(private httpClient:HttpClient, private router:Router) {}
 
     authenticate(email, password) {
-        return this.httpClient.post<any>('http://"+window.location.hostname+":9088/authenticate',{"emailId":email,"password":password});
+        return this.httpClient.post<any>('http://'+window.location.hostname+':9088/authenticate',{"emailId":email,"password":password});
     }
   
     register(data:any){
